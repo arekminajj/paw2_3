@@ -19,6 +19,7 @@
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
       .then((posts) => {
+        console.log(posts)
         let html = "<ul>";
 
         posts.forEach((post) => {
@@ -44,6 +45,7 @@
       fetch("https://jsonplaceholder.typicode.com/posts")
         .then((response) => response.json())
         .then((posts) => {
+          console.log(posts)
           let html = "<ul>";
 
           posts.forEach((post) => {
@@ -72,6 +74,8 @@
       fetch("https://jsonplaceholder.typicode.com/posts/" + post_id)
         .then((response) => response.json())
         .then((post) => {
+          console.log(post)
+          console.log(post.title)
           let html = "<div>";
           html += `
             <h1>${post.title}</h1><br>
