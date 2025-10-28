@@ -1,3 +1,23 @@
+function showLoading() {
+  if (!document.getElementById("dynamic-loading")) {
+    const loadingDiv = document.createElement("div");
+    loadingDiv.id = "dynamic-loading";
+
+    const text = document.createElement("p");
+    text.textContent = "Loading...";
+
+    loadingDiv.appendChild(text);
+    document.body.appendChild(loadingDiv);
+  }
+}
+
+function hideLoading() {
+  const loadingDiv = document.getElementById("dynamic-loading");
+  if (loadingDiv) {
+    loadingDiv.remove();
+  }
+}
+
 (function () {
   const example = document.getElementById("example");
   const cw1 = document.getElementById("cw1");
@@ -39,7 +59,7 @@
   });
 
   cw2.addEventListener("click", function () {
-    answer.innerHTML = "Loading...";
+    showLoading();
 
     setTimeout(() => {
       fetch("https://jsonplaceholder.typicode.com/posts")
@@ -62,11 +82,12 @@
           answer.innerHTML = html;
         })
         .catch((err) => console.log(err));
+        hideLoading();
     }, 1000);
   });
 
   cw3.addEventListener("click", function () {
-    answer.innerHTML = "Loading...";
+    showLoading()
 
     post_id = document.getElementById("post_id").value;
 
@@ -86,6 +107,7 @@
           answer.innerHTML = html;
         })
         .catch((err) => console.log(err));
+        hideLoading();
     }, 1000);
   });
 
