@@ -3,6 +3,7 @@
   const cw1 = document.getElementById("cw1");
   const cw2 = document.getElementById("cw2");
   const cw3 = document.getElementById("cw3");
+  const cw4 = document.getElementById("cw4");
   const answer = document.getElementById("answer");
 
   example.addEventListener("click", function () {
@@ -82,5 +83,33 @@
         })
         .catch((err) => console.log(err));
     }, 1000);
+  });
+
+  cw4.addEventListener("click", async () => {
+    answer.innerHTML = "Processing...";
+
+    try {
+      const newPost = {
+        title: document.getElementById("post_title").value,
+        body: document.getElementById("post_body").value,
+        userId: 1,
+      };
+
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/posts",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newPost),
+        }
+      );
+
+      const data = await response.json();
+      answer.innerHTML = `Dodano nowy post o ID = ${data.id}`;
+    } catch (err) {
+      answer.innerHTML = `Wystąpił błąd: ${err.message}`;
+    }
   });
 })();
