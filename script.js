@@ -37,7 +37,29 @@
   });
 
   cw2.addEventListener("click", function () {
-    //TODO
+    answer.innerHTML = "Loading...";
+
+    setTimeout(() => {
+      fetch("https://jsonplaceholder.typicode.com/posts")
+        .then((response) => response.json())
+        .then((posts) => {
+          let html = "<ul>";
+
+          posts.forEach((post) => {
+            html += `
+          <li>
+            <strong>${post.title}</strong><br>
+            <em>${post.body}</em>
+          </li>
+        `;
+          });
+
+          html += "</ul>";
+
+          answer.innerHTML = html;
+        })
+        .catch((err) => console.log(err));
+    }, 1000);
   });
 
   cw3.addEventListener("click", function () {
