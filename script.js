@@ -63,6 +63,24 @@
   });
 
   cw3.addEventListener("click", function () {
-    //TODO
+    answer.innerHTML = "Loading...";
+
+    post_id = document.getElementById("post_id").value;
+
+    setTimeout(() => {
+      fetch("https://jsonplaceholder.typicode.com/posts/" + post_id)
+        .then((response) => response.json())
+        .then((post) => {
+          let html = "<div>";
+          html += `
+            <h1>${post.title}</h1><br>
+            <p>${post.body}</p>
+        `;
+          html += "</div>";
+
+          answer.innerHTML = html;
+        })
+        .catch((err) => console.log(err));
+    }, 1000);
   });
 })();
