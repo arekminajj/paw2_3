@@ -86,6 +86,34 @@ function hideLoading() {
     }, 1000);
   });
 
+  cw2_3.addEventListener("click", function () {
+    showLoading();
+
+    setTimeout(() => {
+      fetch("https://my-json-server.typicode.com/arekminajj/paw_2_3/posts")
+        .then((response) => response.json())
+        .then((posts) => {
+          console.log(posts)
+          let html = "<ul>";
+
+          posts.forEach((post) => {
+            html += `
+          <li>
+            <strong>Post id: ${post.id}</strong><br>
+            <em>Tytuł: ${post.title}</em>
+          </li>
+        `;
+          });
+
+          html += "</ul>";
+
+          answer.innerHTML = html;
+        })
+        .catch((err) => console.log(err));
+        hideLoading();
+    }, 1000);
+  });
+
   cw3.addEventListener("click", function () {
     showLoading()
 
